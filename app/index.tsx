@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Pressable, StyleSheet, FlatList } from "react-native";
+import { Text, View, TextInput, Pressable, StyleSheet } from "react-native";
 import { SafeAreaView} from "react-native-safe-area-context";
 import { useState, useContext } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
@@ -6,7 +6,9 @@ import { data } from '@/data/todos';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 
+
 import { Inter_500Medium, useFonts } from "@expo-google-fonts/inter";
+import Animated, {LinearTransition} from "react-native-reanimated";
 
 type todoType = {
   id: number;
@@ -83,10 +85,13 @@ export default function Index() {
           <Octicons name={colorScheme === "dark" ? "moon" : "sun"} size={36} color={theme.text} selectable={undefined}  style = {{ width: 36}} />
         </Pressable>
       </View>
-      <FlatList 
+      <Animated.FlatList 
         data={todos}
         keyExtractor={todo => todo.title}
         renderItem={renderItem}
+        contentContainerStyle={{ flexGrow: 1}}
+        itemLayoutAnimation={LinearTransition}
+        keyboardDismissMode="on-drag"
       />
     </SafeAreaView>
   );
