@@ -6,6 +6,7 @@ import { data } from '@/data/todos';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import { StatusBar } from "expo-status-bar";
+import { useRouter } from "expo-router";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -30,6 +31,8 @@ export default function Index() {
   const [loaded, error] = useFonts({
     Inter_500Medium
   });
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async() => {
@@ -72,12 +75,16 @@ export default function Index() {
 
   const renderItem = ({item}: {item : todoType} ) => (
       <View style={styles.todoItem}>
-        <Text 
-          style={[styles.todoText, item.completed && styles.completedText]}
-          onPress={() => toggleTodo(item.id)}
+        <Pressable
+        onPress={() => handlePress(item.id)}
+          onLongPress={() => toggleTodo(item.id)}
         >
-          {item.title}
-        </Text>
+          <Text 
+            style={[styles.todoText, item.completed && styles.completedText]}
+          >
+            {item.title}
+          </Text>
+        </Pressable>
         <Pressable onPress={() => removeTodo(item.id)}>
           <MaterialCommunityIcons name="delete-circle-outline" size={36} color="red" selectable={undefined} />
         </Pressable>
@@ -101,12 +108,17 @@ export default function Index() {
     setTodos(todos.filter(todo => todo.id !== id ))
   }
 
+  const handlePress = (id: number) => {
+    router.push({ pathname: "/todos/[id]", params: { id: String(id) } });
+  }
+
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput 
           style={styles.input}
+          maxLength={30}
           placeholder="Add a new todo"
           placeholderTextColor="grey"
           value={text}
