@@ -1,0 +1,5 @@
+For my extra credit, I watched “React Native Full Course for Beginners” by @DaveGrayTeachesCode on the freeCodeCamp.org YouTube channel. This tutorial helped me understand how to build a complete React Native app from start to finish. It covered many topics we’ve been learning in class—such as components, navigation, and state management—and also introduced some new ones like custom fonts, animations, and splash screens.
+
+One part that stood out to me was how the video explained setting up AsyncStorage and how to prepare development builds. Seeing those steps made me feel more confident about managing data locally and getting the app ready for testing.
+
+The biggest challenge was following along with animations and custom fonts, since those used libraries I haven’t worked with yet. However, now I’m excited to try them in my own projects. I’d like to focus on improving the visual design of my apps by experimenting with fonts and simple animations. Overall, this tutorial gave me a much clearer picture of how different pieces of a React Native app come together.
